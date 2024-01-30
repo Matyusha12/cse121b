@@ -47,7 +47,7 @@ document.querySelector('#multiplyNumbers').addEventListener('click', multiplyNum
 
 
 /* Open Function Use - Divide Numbers */
-// Using a function declaration or expression
+
 const divide = (number1, number2) => number1 / number2;
 
 function divideNumbers() {
@@ -60,12 +60,13 @@ document.querySelector('#divideNumbers').addEventListener('click', divideNumbers
 
 /* Decision Structure */
 
-document.querySelector('#getTotalDue').addEventListener('click', () => {
-    let subtotal = Number(document.querySelector('#subtotal').value);
-    let discount = document.querySelector('#membership').checked ? 0.2 : 0;
-    let total = subtotal - (subtotal * discount);
-    document.querySelector('#total').textContent = `Total: $${total.toFixed(2)}`;
-  });
+document.querySelector('#getTotal').addEventListener('click', () => {
+  let subtotal = Number(document.querySelector('#subtotal').value);
+  let isMember = document.querySelector('#member').checked;
+  let discountRate = isMember ? 0.2 : 0; 
+  let totalDue = subtotal - (subtotal * discountRate);
+  document.querySelector('#total').textContent = `Total: $${totalDue.toFixed(2)}`;
+});
   
 
 /* ARRAY METHODS - Functional Programming */
@@ -73,25 +74,25 @@ document.querySelector('#getTotalDue').addEventListener('click', () => {
 /* Output Source Array */
 
 let numbersArray = [1,2,3,4,5,6,7,8,9,10,11,12,13];
-document.querySelector('#array').textContent = numbersArray.join(', ');
+document.querySelector('#array') .innerHTML = numbersArray.join(', ');
 
 /* Output Odds Only Array */
 
-document.querySelector('#odds').textContent = numbersArray.filter(number => number % 2 === 1).join(', ');
+document.querySelector('#odds').innerHTML = numbersArray.filter(number => number % 2 === 1).join(', ');
 
 
 /* Output Evens Only Array */
 
-document.querySelector('#evens').textContent = numbersArray.filter(number => number % 2 === 0).join(', ');
+document.querySelector('#evens').innerHTML = numbersArray.filter(number => number % 2 === 0).join(', ');
 
 /* Output Sum of Org. Array */
 
 let sum = numbersArray.reduce((sum, number) => sum + number, 0);
-document.querySelector('#sumOfArray').textContent = `Sum: ${sum}`;
+document.querySelector('#sumOfArray').innerHTML= `Sum: ${sum}`;
 
 /* Output Multiplied by 2 Array */
 
-document.querySelector('#multiplied').textContent = numbersArray.map(number => number * 2).join(', ');
+document.querySelector('#multiplied').innerHTML= numbersArray.map(number => number * 2).join(', ');
 
 /* Output Sum of Multiplied by 2 Array */
 
