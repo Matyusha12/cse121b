@@ -64,10 +64,10 @@ const filterTemples = () => {
             filteredTemples = templeList.filter(temple => new Date(temple.dedicated) < new Date(1950, 0, 1));
             break;
         case "all":
-            filteredTemples = templeList; // No filter applied
+            filteredTemples = templeList; 
             break;
         default:
-            filteredTemples = []; // Default case to handle any unexpected values
+            filteredTemples = []; 
     }
     displayTemples(filteredTemples);
 };
