@@ -25,19 +25,12 @@ const displayTemples = (temples) => {
 };
 
 /* async getTemples Function using fetch()*/
-const getTemples = async () => {
-    try {
-        const response = await fetch("https://byui-cse.github.io/cse121b-ww-course/resources/temples.json");
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        templeList = await response.json();
-        displayTemples(templeList);
-    } catch (error) {
-        console.error('Fetch error:', error);
-    }
-};
 
+const getTemples = async () => {
+    const response = await fetch("https://byui-cse.github.io/cse121b-ww-course/resources/temples.json");
+    templeList = await response.json();
+    displayTemples(templeList);
+};
 
 /* reset Function */
 
@@ -46,34 +39,29 @@ const reset = () => {
 };
 
 /* filterTemples Function */
-getTemples();
 
-const filterTemples = () => {
+const filterTemples = (temples) => {
     reset();
     const filter = document.querySelector('#filtered').value;
     
-    let filteredTemples;
     switch (filter) {
         case "utah":
-            filteredTemples = templeList.filter(temple => temple.location.toLowerCase().includes("utah"));
+            displayTemples(temples.filter(temple => temple.location.includes("Utah, United States")));
             break;
         case "nonutah":
-            filteredTemples = templeList.filter(temple => !temple.location.toLowerCase().includes("utah"));
+            displayTemples(temples.filter(temple => !temple.location.includes("Utah, United States")));
             break;
         case "older":
-            filteredTemples = templeList.filter(temple => new Date(temple.dedicated) < new Date(1950, 0, 1));
+            displayTemples(temples.filter(temple => new Date(temple.dedicated) < new Date(1950, 0, 1)));
             break;
         case "all":
-            filteredTemples = templeList; 
+            displayTemples(temples);
             break;
-        default:
-            filteredTemples = []; 
     }
-    displayTemples(filteredTemples);
 };
 
+getTemples();
+
 /* Event Listener */
-document.addEventListener('DOMContentLoaded', () => {
-    getTemples(); 
-    document.querySelector("#filtered").addEventListener("change", () => filterTemples(templeList));
-});
+document.querySelector("#filtered").addEventListener("change", () => { filterTemples(templeList); });
+
